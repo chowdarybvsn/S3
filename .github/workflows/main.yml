@@ -1,6 +1,7 @@
 name: Setup Terraform Workspace
 
 on:
+  workflow_dispatch:
   pull_request:
     types:
       - opened
