@@ -21,7 +21,10 @@ jobs:
       - name: Update Terraform Configuration
         run: |
           WORKSPACE_NAME="pr-${{ github.event.number }}"
-          echo "workspace \"$WORKSPACE_NAME\" {}" > workspace.tf
+          #echo "workspace \"$WORKSPACE_NAME\" {}" > workspace.tf
+      
+      - name: list files
+        run: ls -ltr
 
       - name: Initialize Terraform
         run: terraform init -backend=false
