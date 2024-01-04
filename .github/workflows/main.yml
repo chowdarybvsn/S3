@@ -1,5 +1,7 @@
 name: Setup Terraform Workspace
-
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 on:
   workflow_dispatch:
   pull_request:
@@ -15,6 +17,18 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+      - name: Install AWS CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y awscli
+      - name: Create AWS credentials directory
+        run: mkdir -p ~/.aws
+        
+      - name: Configure AWS credentials
+        run: |
+          echo "[default]" > ~/.aws/credentials
+          echo "aws_access_key_id=${AWS_ACCESS_KEY_ID}" >> ~/.aws/credentials
+          echo "aws_secret_access_key=${AWS_SECRET_ACCESS_KEY}" >> ~/.aws/credentials
 
       - name: Set up Terraform CLI
         uses: hashicorp/setup-terraform@v1
