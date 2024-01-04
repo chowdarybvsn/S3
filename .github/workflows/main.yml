@@ -30,7 +30,7 @@ jobs:
               echo "Using WORKSPACE_NAME: $WORKSPACE_NAME"
 
       - name: Initialize Terraform
-        run: terraform init -backend=false
+        run: terraform init                                    #-backend=false
 
       - name: Create Terraform Workspace
         run: terraform workspace new $WORKSPACE_NAME || terraform workspace select $WORKSPACE_NAME
