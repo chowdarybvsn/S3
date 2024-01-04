@@ -1,0 +1,30 @@
+name: Setup Terraform Workspace
+
+on:
+  pull_request:
+    types:
+      - opened
+
+jobs:
+  setup_workspace:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Terraform CLI
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.0.0
+
+      - name: Update Terraform Configuration
+        run: |
+          WORKSPACE_NAME="pr-${{ github.event.number }}"
+          echo "workspace \"$WORKSPACE_NAME\" {}" > workspace.tf
+
+      - name: Initialize Terraform
+        run: terraform init -backend=false
+
+      - name: Create Terraform Workspace
+        run: terraform workspace new $WORKSPACE_NAME || terraform workspace select $WORKSPACE_NAME
