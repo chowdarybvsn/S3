@@ -67,6 +67,7 @@ jobs:
 
       - name: terraform apply
         run: |
+            cd terraform-base
             terraform apply --auto-approve
 
       
