@@ -50,7 +50,9 @@ jobs:
              terraform init                                    #-backend=false
 
       - name: Create Terraform Workspace
-        run: terraform workspace new $WORKSPACE_NAME || terraform workspace select $WORKSPACE_NAME
+        run: |
+             cd terraform-base
+             terraform workspace new $WORKSPACE_NAME || terraform workspace select $WORKSPACE_NAME
 
       - name: Initialize Terraform
         run: |
