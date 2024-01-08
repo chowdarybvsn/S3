@@ -58,7 +58,9 @@ jobs:
            terraform init
            
       - name: plan terraform
-        run: terraform plan
+        run: |
+           cd terraform-base
+           terraform plan
 
       - name: list workspaces
         run:  terraform workspace list
