@@ -65,9 +65,11 @@ jobs:
            terraform plan
 
       - name: list workspaces
-        run:  terraform workspace list
+        run:  |
+          cd terraform-base 
+          terraform workspace list
 
       - name: terraform apply
         run: |
             cd terraform-base
-            terraform plan --auto-approve
+            terraform apply --auto-approve
