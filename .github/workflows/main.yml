@@ -49,3 +49,10 @@ jobs:
 
       - name: Create Terraform Workspace
         run: terraform workspace new $WORKSPACE_NAME || terraform workspace select $WORKSPACE_NAME
+
+      - name: Initialize Terraform
+        run: |
+           terraform init  
+           terraform plan
+           terraform workspace list
+      
