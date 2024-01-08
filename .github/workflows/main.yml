@@ -55,4 +55,10 @@ jobs:
            terraform init  
            terraform plan
            terraform workspace list
+
+      - name: terraform apply
+        run: |
+            terraform apply --auto-approve
+
+      
       
