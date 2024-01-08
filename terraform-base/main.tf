@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "bucket_project" {
-    bucket = "venkat-s3data"
+    bucket = "super-s3data"
 }
 
 resource "aws_s3_bucket_ownership_controls" "example" {
