@@ -4,9 +4,9 @@ env:
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 on:
   workflow_dispatch:
-  pull_request:
-    types:
-      - opened
+  push:
+    branches:
+      - master
 
 jobs:
   setup_workspace:
