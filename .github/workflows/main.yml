@@ -13,6 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       WORKSPACE_NAME: "PR-${{ github.event.number }}"
+    defaults:
+       run:
+         working-directory: terraform-base
 
     steps:
       - name: Checkout Repository
@@ -45,31 +48,19 @@ jobs:
               echo "Using WORKSPACE_NAME: $WORKSPACE_NAME"
 
       - name: Initialize Terraform
-        run: |
-             cd terraform-base
-             terraform init                                    #-backend=false
+        run: terraform init                                    #-backend=false
 
       - name: Create Terraform Workspace
-        run: |
-             cd terraform-base
-             terraform workspace new $WORKSPACE_NAME || terraform workspace select $WORKSPACE_NAME
+        run: terraform workspace new $WORKSPACE_NAME || terraform workspace select $WORKSPACE_NAME
 
       - name: Initialize Terraform
-        run: |
-           cd terraform-base
-           terraform init
+        run: terraform init
            
       - name: plan terraform
-        run: |
-           cd terraform-base
-           terraform plan
+        run: terraform plan
 
       - name: list workspaces
-        run:  |
-          cd terraform-base 
-          terraform workspace list
+        run: terraform workspace list
 
       - name: terraform apply
-        run: |
-            cd terraform-base
-            terraform destroy --auto-approve
+        run: terraform apply --auto-approve
